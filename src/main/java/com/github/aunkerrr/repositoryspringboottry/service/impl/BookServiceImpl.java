@@ -5,7 +5,6 @@ import com.github.aunkerrr.repositoryspringboottry.repository.impl.BookRepositor
 import com.github.aunkerrr.repositoryspringboottry.service.BookService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
