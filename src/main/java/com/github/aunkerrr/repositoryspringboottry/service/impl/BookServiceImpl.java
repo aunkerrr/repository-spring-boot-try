@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookServiceImpl implements BookService {
 
-    @Autowired
     private BookRepositoryImpl bookRepository;
 
     @Override
