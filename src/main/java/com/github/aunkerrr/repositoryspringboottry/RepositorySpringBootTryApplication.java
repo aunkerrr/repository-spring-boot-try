@@ -1,5 +1,7 @@
 package com.github.aunkerrr.repositoryspringboottry;
 
+import com.github.aunkerrr.repositoryspringboottry.dto.BookDto;
+import com.github.aunkerrr.repositoryspringboottry.dto.CreateBookRequestDto;
 import com.github.aunkerrr.repositoryspringboottry.model.Book;
 import com.github.aunkerrr.repositoryspringboottry.service.BookService;
 import java.math.BigDecimal;
@@ -18,7 +20,7 @@ public class RepositorySpringBootTryApplication {
     @Bean
     public CommandLineRunner commandLineRunner(BookService bookService) {
         return args -> {
-            Book newBook = new Book();
+            CreateBookRequestDto newBook = new CreateBookRequestDto();
             newBook.setTitle("1984");
             newBook.setAuthor("George Orwell");
             newBook.setIsbn("978-0451524935");
