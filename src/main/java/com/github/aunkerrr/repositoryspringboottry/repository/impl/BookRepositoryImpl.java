@@ -5,8 +5,8 @@ import com.github.aunkerrr.repositoryspringboottry.repository.BookRepository;
 import jakarta.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class BookRepositoryImpl implements BookRepository {
@@ -33,8 +33,9 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
+    @Transactional
     public Optional<Book> findById(Long id) {
-            return Optional.ofNullable(entityManager
-                    .find(Book.class, id));
+        return Optional.ofNullable(entityManager
+                .find(Book.class, id));
     }
 }

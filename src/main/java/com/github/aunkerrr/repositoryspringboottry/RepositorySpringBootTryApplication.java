@@ -1,8 +1,6 @@
 package com.github.aunkerrr.repositoryspringboottry;
 
-import com.github.aunkerrr.repositoryspringboottry.dto.BookDto;
 import com.github.aunkerrr.repositoryspringboottry.dto.CreateBookRequestDto;
-import com.github.aunkerrr.repositoryspringboottry.model.Book;
 import com.github.aunkerrr.repositoryspringboottry.service.BookService;
 import java.math.BigDecimal;
 import org.springframework.boot.CommandLineRunner;
