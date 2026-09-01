@@ -3,9 +3,10 @@ package com.github.aunkerrr.repositoryspringboottry.repository.impl;
 import com.github.aunkerrr.repositoryspringboottry.model.Book;
 import com.github.aunkerrr.repositoryspringboottry.repository.BookRepository;
 import jakarta.persistence.EntityManager;
-import jakarta.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class BookRepositoryImpl implements BookRepository {
@@ -29,5 +30,12 @@ public class BookRepositoryImpl implements BookRepository {
         return entityManager
                 .createQuery("select b from Book b", Book.class)
                 .getResultList();
+    }
+
+    @Override
+    @Transactional
+    public Optional<Book> findById(Long id) {
+        return Optional.ofNullable(entityManager
+                .find(Book.class, id));
     }
 }
