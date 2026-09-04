@@ -16,18 +16,6 @@ public class RepositorySpringBootTryApplication {
     @Bean
     public CommandLineRunner commandLineRunner(BookService bookService) {
         return args -> {
-            /* CreateBookRequestDto newBook = new CreateBookRequestDto();
-            newBook.setTitle("1984");
-            newBook.setAuthor("George Orwell");
-            newBook.setIsbn("978-0451524935");
-            newBook.setPrice(BigDecimal.valueOf(9.99));
-            newBook.setDescription("Dystopian novel");
-
-            bookService.save(newBook);
-            System.out.println("Book saved");
-
-            System.out.println("All books in db: ");
-            bookService.findAll();*/
         };
     }
 }
