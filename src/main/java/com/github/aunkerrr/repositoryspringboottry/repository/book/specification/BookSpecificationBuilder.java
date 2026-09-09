@@ -1,8 +1,8 @@
-package com.github.aunkerrr.repositoryspringboottry.repository.bookSpec;
+package com.github.aunkerrr.repositoryspringboottry.repository.book.specification;
 
 import com.github.aunkerrr.repositoryspringboottry.dto.BookSearchParametersDto;
 import com.github.aunkerrr.repositoryspringboottry.model.Book;
-import com.github.aunkerrr.repositoryspringboottry.repository.spec.SpecificationBuilder;
+import com.github.aunkerrr.repositoryspringboottry.repository.specification.SpecificationBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ public class BookSpecificationBuilder implements SpecificationBuilder<Book> {
                     .getSpecification(searchParametersDto.authors()));
         }
 
-        if (searchParametersDto.titles() != null && searchParametersDto.titles().length > 0 ) {
+        if (searchParametersDto.titles() != null && searchParametersDto.titles().length > 0) {
             specification = specification.and(bookSpecificationProviderManager
                     .getSpecificationProviderManager("title")
                     .getSpecification(searchParametersDto.titles()));

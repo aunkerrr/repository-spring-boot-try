@@ -7,7 +7,7 @@ import com.github.aunkerrr.repositoryspringboottry.exception.EntityNotFoundExcep
 import com.github.aunkerrr.repositoryspringboottry.mapper.BookMapper;
 import com.github.aunkerrr.repositoryspringboottry.model.Book;
 import com.github.aunkerrr.repositoryspringboottry.repository.BookRepository;
-import com.github.aunkerrr.repositoryspringboottry.repository.bookSpec.BookSpecificationBuilder;
+import com.github.aunkerrr.repositoryspringboottry.repository.book.specification.BookSpecificationBuilder;
 import com.github.aunkerrr.repositoryspringboottry.service.BookService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

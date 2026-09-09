@@ -1,9 +1,8 @@
-package com.github.aunkerrr.repositoryspringboottry.repository.bookSpec;
-
+package com.github.aunkerrr.repositoryspringboottry.repository.book.specification;
 
 import com.github.aunkerrr.repositoryspringboottry.model.Book;
-import com.github.aunkerrr.repositoryspringboottry.repository.spec.SpecificationProvider;
-import com.github.aunkerrr.repositoryspringboottry.repository.spec.SpecificationProviderManager;
+import com.github.aunkerrr.repositoryspringboottry.repository.specification.SpecificationProvider;
+import com.github.aunkerrr.repositoryspringboottry.repository.specification.SpecificationProviderManager;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
