@@ -1,14 +1,17 @@
 package com.github.aunkerrr.repositoryspringboottry.service.impl;
 
 import com.github.aunkerrr.repositoryspringboottry.dto.BookDto;
+import com.github.aunkerrr.repositoryspringboottry.dto.BookSearchParametersDto;
 import com.github.aunkerrr.repositoryspringboottry.dto.CreateBookRequestDto;
 import com.github.aunkerrr.repositoryspringboottry.exception.EntityNotFoundException;
 import com.github.aunkerrr.repositoryspringboottry.mapper.BookMapper;
 import com.github.aunkerrr.repositoryspringboottry.model.Book;
 import com.github.aunkerrr.repositoryspringboottry.repository.BookRepository;
+import com.github.aunkerrr.repositoryspringboottry.repository.bookSpec.BookSpecificationBuilder;
 import com.github.aunkerrr.repositoryspringboottry.service.BookService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +20,7 @@ public class BookServiceImpl implements BookService {
  
     private final BookMapper bookMapper;
     private final BookRepository bookRepository;
+    private final BookSpecificationBuilder bookSpecificationBuilder;
 
     @Override
     public BookDto save(CreateBookRequestDto requestDto) {
@@ -58,5 +62,17 @@ public class BookServiceImpl implements BookService {
     @Override
     public void deleteBookById(Long id) {
         bookRepository.deleteById(id);
+    }
+
+    @Override
+    public List<BookDto> search(BookSearchParametersDto bookSearchParametersDto) {
+        Specification<Book> bookSpecification = bookSpecificationBuilder
+                .build(bookSearchParametersDto);
+
+        return bookRepository
+                .findAll(bookSpecification)
+                .stream()
+                .map(bookMapper::toDto)
+                .toList();
     }
 }
