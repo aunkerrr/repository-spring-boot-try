@@ -1,6 +1,7 @@
 package com.github.aunkerrr.repositoryspringboottry.controller;
 
 import com.github.aunkerrr.repositoryspringboottry.dto.BookDto;
+import com.github.aunkerrr.repositoryspringboottry.dto.BookSearchParametersDto;
 import com.github.aunkerrr.repositoryspringboottry.dto.CreateBookRequestDto;
 import com.github.aunkerrr.repositoryspringboottry.service.BookService;
 import java.util.List;
@@ -48,5 +49,10 @@ public class BookController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBookById(@PathVariable Long id) {
         bookService.deleteBookById(id);
+    }
+
+    @GetMapping("/search")
+    public List<BookDto> search(BookSearchParametersDto bookSearchParametersDto) {
+        return bookService.search(bookSearchParametersDto);
     }
 }
