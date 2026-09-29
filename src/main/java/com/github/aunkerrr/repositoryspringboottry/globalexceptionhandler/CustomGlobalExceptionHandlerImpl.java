@@ -1,13 +1,14 @@
 package com.github.aunkerrr.repositoryspringboottry.globalexceptionhandler;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+
 import com.github.aunkerrr.repositoryspringboottry.exception.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import org.jspecify.annotations.Nullable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -21,16 +22,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class CustomGlobalExceptionHandlerImpl extends ResponseEntityExceptionHandler {
 
-
-
     @Override
-    protected @Nullable ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                            HttpHeaders headers,
-                                                                            HttpStatusCode status,
-                                                                            WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex,
+            HttpHeaders headers,
+            HttpStatusCode status,
+            WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.BAD_REQUEST);
 
         List<String> errors = ex.getBindingResult().getAllErrors()
                 .stream().map(this::getErrorMessage)
@@ -38,7 +37,17 @@ public class CustomGlobalExceptionHandlerImpl extends ResponseEntityExceptionHan
 
         body.put("errors", errors);
 
-        return new ResponseEntity<>(body, headers, status);
+        return new ResponseEntity<>(body, headers, BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException exception) {
+        Map<String, Object> body = new LinkedHashMap<>();
+
+        body.put("timestamp", LocalDateTime.now());
+        body.put("error", exception.getMessage());
+
+        return new ResponseEntity<>(body, NOT_FOUND);
     }
 
     private String getErrorMessage(ObjectError error) {
@@ -48,16 +57,5 @@ public class CustomGlobalExceptionHandlerImpl extends ResponseEntityExceptionHan
             return field + " " + message;
         }
         return error.getDefaultMessage();
-    }
-
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException exception) {
-        Map<String, Object> body = new LinkedHashMap<>();
-
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.NOT_FOUND);
-        body.put("error", exception.getMessage());
-
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 }
